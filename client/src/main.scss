@@ -1,0 +1,17 @@
+//RESET THE PAGE BASICS
+@import "scss/base/reset";
+
+//Import abstracts
+@import "scss/abstracts/variables";
+@import "scss/abstracts/mixin";
+
+//Import utils
+@import "scss/utils/utils";
+
+//Imprt scss layout
+@import "scss/layout/grid";
+
+//Import scss components
+@import "scss/component/navbar";
+@import "scss/component/bgImage";
+@import "scss/component/account";

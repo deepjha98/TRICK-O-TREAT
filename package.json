@@ -4,7 +4,10 @@
   "description": "It is a deals app ",
   "main": "app.js",
   "scripts": {
-    "app": "nodemon app.js"
+    "server": "nodemon app.js",
+    "client": "npm start --prefix client",
+    "clientInstall": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

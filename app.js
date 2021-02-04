@@ -13,7 +13,7 @@ var UserRoutes = require("./routes/userRoutes");
 app.use(UserRoutes);
 
 //////////////////////////////////////////////
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
   console.log("SERVER HAS STARTED...");
 });

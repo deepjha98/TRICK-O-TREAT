@@ -1,0 +1,50 @@
+.account {
+  height: calc(100vh - 8rem);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__section {
+    width: 70%;
+    &__label {
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: "Roboto", Arial;
+      color: rgba(113, 156, 102, 0.9);
+    }
+  }
+}
+.form-addon__icon {
+  position: absolute;
+  color: $color-primary;
+  font-size: 0.8rem;
+  line-height: 1;
+  top: 50%;
+
+  right: $gutter;
+}
+.form-addon {
+  .form-addon__icon {
+    transform: translateY(0);
+    opacity: 0;
+    transition: transform 150ms ease, opacity 150ms ease;
+  }
+
+  &.is-valid [class*="icon-valid"],
+  &.is-invalid [class*="icon-invalid"] {
+    opacity: 1;
+  }
+
+  &.is-invalid {
+    background-color: lighten($important-color, 42%);
+    border-color: lighten($important-color, 20%);
+
+    .form-addon__icon {
+      color: $important-color;
+    }
+
+    .form-addon__addon:before {
+      border-color: lighten($important-color, 20%);
+    }
+  }
+}
