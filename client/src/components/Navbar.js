@@ -1,7 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 ///////////////////////////////////////////////
 class Navbar extends React.Component {
+  /*
+    Check whether the user exists 
+    if yes then show only logout
+    else show login and register
+  */
+  rightLinks = (user) => {
+    return user ? (
+      <div className="navbar__right">
+        <li>
+          <Link to={`/${user._id}`}>{user.name.split(" ", 1)}</Link>
+        </li>
+        <li>
+          <Link to="/logout">Logout</Link>
+        </li>
+      </div>
+    ) : (
+      <div className="navbar__right">
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+      </div>
+    );
+  };
   render() {
     return (
       <nav className="navbar">
@@ -12,14 +39,7 @@ class Navbar extends React.Component {
                 <img src="/images/logo.png" alt="logo"></img>
               </Link>
             </div>
-            <div className="navbar__right">
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
-            </div>
+            {this.rightLinks(this.props.user)}
           </div>
         </div>
       </nav>
@@ -27,4 +47,9 @@ class Navbar extends React.Component {
   }
 }
 ///////////////////////////////////////////////
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.AuthReducer.user,
+  };
+};
+export default connect(mapStateToProps)(Navbar);

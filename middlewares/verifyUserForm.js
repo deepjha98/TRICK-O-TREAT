@@ -8,8 +8,8 @@ module.exports.UserVerify = [
     .isLength({ min: 10, max: 10 })
     .withMessage("INVALID PHONE NUMBER"),
   body("password")
-    .isLength({ min: 10 })
-    .withMessage("PASSWORD MUST BE OF 10 DIGIT"),
+    .isLength({ min: 8 })
+    .withMessage("PASSWORD MUST BE OF 8 DIGIT"),
 ];
 
 //----USER LOGIN VALIDATE-----

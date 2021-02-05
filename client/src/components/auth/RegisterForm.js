@@ -6,7 +6,6 @@ import { Field } from "redux-form";
 class RegisterForm extends React.Component {
   //Error under the input
   renderError(meta) {
-    console.log(meta);
     if (meta.touched && meta.error) {
       return <>{meta.error}</>;
     }
