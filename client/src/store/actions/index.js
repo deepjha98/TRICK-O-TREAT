@@ -1,5 +1,12 @@
 import registerApi from "../../apis/registerApi";
-import { REGISTER_ERRORS, SET_LOADER, CLOSE_LOADER, SET_TOKEN } from "../type";
+import {
+  REGISTER_ERRORS,
+  SET_LOADER,
+  CLOSE_LOADER,
+  SET_TOKEN,
+  USER_LOGOUT,
+  LOGIN_ERORRS,
+} from "../type";
 /////////////////////////////////////////
 //ACTIONS USING DISPATCH FROM THUNK
 export const postRegister = (formValues) => {
@@ -28,6 +35,38 @@ export const postRegister = (formValues) => {
         type: REGISTER_ERRORS,
         payload: error.response.data.errors,
       });
+      console.log(error.response.data.errors);
+    }
+  };
+};
+//  POST TO LOGOUT USER
+export const postLogout = () => {
+  return (dispatch) => {
+    localStorage.removeItem("MyToken");
+    window.history.pushState("/");
+    dispatch({ type: USER_LOGOUT });
+  };
+};
+
+//POST TO LOGIN USER
+export const postLogin = (formValues) => {
+  return async (dispatch) => {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    try {
+      dispatch({ type: SET_LOADER });
+      const { data } = await registerApi.post("/login", formValues, config);
+      console.log(data);
+      dispatch({ type: CLOSE_LOADER });
+      localStorage.setItem("MyToken", data.token);
+      dispatch({
+        type: SET_TOKEN,
+        payload: data.token,
+      });
+    } catch (error) {
+      dispatch({ type: CLOSE_LOADER });
+      dispatch({ type: LOGIN_ERORRS, payload: error.response.data.errors });
       console.log(error.response.data.errors);
     }
   };

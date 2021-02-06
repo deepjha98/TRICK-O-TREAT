@@ -1,10 +1,27 @@
+import { useEffect } from "react";
 import { reduxForm } from "redux-form";
 import { Helmet } from "react-helmet";
+import toast, { Toaster } from "react-hot-toast";
 import BgImage from "./bgImage";
 import LoginForm from "./LoginForm";
+import { postLogin } from "../../store/actions";
+import { connect } from "react-redux";
 /////////////////////////////////////////////
 
-const Login = () => {
+const Login = (props) => {
+  const userLogin = (formValues) => {
+    props.postLogin(formValues);
+  };
+  useEffect(() => {
+    if (props.loginError.length > 0) {
+      props.loginError.map((error) => {
+        toast.error(error.msg);
+      });
+    }
+    if (props.user) {
+      props.history.push("/dashboard");
+    }
+  }, [props.loginError, props.user]);
   return (
     <>
       <Helmet>
@@ -12,6 +29,13 @@ const Login = () => {
         <meta name="description" content="User Login page" />
       </Helmet>
       <div className="row mt-80">
+        <Toaster
+          toastOptions={{
+            style: {
+              fontSize: "10px",
+            },
+          }}
+        ></Toaster>
         <div className="col-8">
           <BgImage />
         </div>
@@ -20,7 +44,7 @@ const Login = () => {
             <div className="account__section">
               <div className="account__section__label">LOGIN</div>
               {/* FORM FOR LOGIN */}
-              <form>
+              <form onSubmit={props.handleSubmit(userLogin)}>
                 {/* THIS IS THE FORM COMPONENT THAT CONATINBS ALL THE REDUX FORM */}
                 <LoginForm />
                 <div className="group">
@@ -47,7 +71,17 @@ const validate = (formValues) => {
   }
   return errors;
 };
-export default reduxForm({
-  form: "LoginForm",
-  validate: validate,
-})(Login);
+
+//MAP STATE TO PROPS
+const mapStateToProps = (state) => {
+  return {
+    loginError: state.AuthReducer.loginError,
+    user: state.AuthReducer.user,
+  };
+};
+export default connect(mapStateToProps, { postLogin })(
+  reduxForm({
+    form: "LoginForm",
+    validate: validate,
+  })(Login)
+);

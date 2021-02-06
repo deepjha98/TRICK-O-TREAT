@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { postLogout } from "../store/actions";
 ///////////////////////////////////////////////
 class Navbar extends React.Component {
+  //  Logout functionality
+  userLogout = () => {
+    this.props.postLogout();
+  };
   /*
     Check whether the user exists 
     if yes then show only logout
@@ -15,7 +20,9 @@ class Navbar extends React.Component {
           <Link to={`/${user._id}`}>{user.name.split(" ", 1)}</Link>
         </li>
         <li>
-          <Link to="/logout">Logout</Link>
+          <a href="/">
+            <span onClick={this.userLogout}>Logout</span>
+          </a>
         </li>
       </div>
     ) : (
@@ -52,4 +59,4 @@ const mapStateToProps = (state) => {
     user: state.AuthReducer.user,
   };
 };
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { postLogout })(Navbar);

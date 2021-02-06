@@ -1,5 +1,12 @@
 //TYPE GET FROM THE FILE
-import { SET_TOKEN, REGISTER_ERRORS, SET_LOADER, CLOSE_LOADER } from "../type";
+import {
+  SET_TOKEN,
+  REGISTER_ERRORS,
+  SET_LOADER,
+  CLOSE_LOADER,
+  USER_LOGOUT,
+  LOGIN_ERORRS,
+} from "../type";
 import jwt_decode from "jwt-decode";
 //DEFINING AN INITIAL STATE
 const initState = {
@@ -47,9 +54,13 @@ const AuthReducer = (state = initState, action) => {
       ...state,
       token: action.payload,
       user: user,
-      loginErrors: [],
-      registerErrors: [],
+      loginError: [],
+      registerError: [],
     };
+  } else if (action.type === USER_LOGOUT) {
+    return { ...state, user: "", token: "" };
+  } else if (action.type === LOGIN_ERORRS) {
+    return { ...state, loginError: action.payload };
   } else {
     return state;
   }
