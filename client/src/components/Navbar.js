@@ -17,6 +17,9 @@ class Navbar extends React.Component {
     return user ? (
       <div className="navbar__right">
         <li>
+          <Link to="/create">New post</Link>
+        </li>
+        <li>
           <Link to={`/${user._id}`}>{user.name.split(" ", 1)}</Link>
         </li>
         <li>

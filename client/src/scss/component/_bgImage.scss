@@ -4,8 +4,8 @@
   background: url("/resources/registerBackGround.jpg");
   background-size: cover;
   @include responsive(mobile) {
-    width: 0%;
-    height: 0%;
+    width: 0;
+    height: 0;
   }
   @include responsive(tablet) {
     background: url("/resources/registerBackGround.jpg");

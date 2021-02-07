@@ -28,14 +28,12 @@ export const postRegister = (formValues) => {
         type: SET_TOKEN,
         payload: data.token,
       });
-      console.log("LET'S CHECK");
     } catch (error) {
       dispatch({ type: CLOSE_LOADER });
       dispatch({
         type: REGISTER_ERRORS,
         payload: error.response.data.errors,
       });
-      console.log(error.response.data.errors);
     }
   };
 };
@@ -54,10 +52,9 @@ export const postLogin = (formValues) => {
     const config = {
       headers: { "Content-Type": "application/json" },
     };
+    dispatch({ type: SET_LOADER });
     try {
-      dispatch({ type: SET_LOADER });
       const { data } = await registerApi.post("/login", formValues, config);
-      console.log(data);
       dispatch({ type: CLOSE_LOADER });
       localStorage.setItem("MyToken", data.token);
       dispatch({
@@ -67,7 +64,6 @@ export const postLogin = (formValues) => {
     } catch (error) {
       dispatch({ type: CLOSE_LOADER });
       dispatch({ type: LOGIN_ERORRS, payload: error.response.data.errors });
-      console.log(error.response.data.errors);
     }
   };
 };

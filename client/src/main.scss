@@ -1,12 +1,9 @@
-//RESET THE PAGE BASICS
-@import "scss/base/reset";
-
 //Import abstracts
 @import "scss/abstracts/variables";
 @import "scss/abstracts/mixin";
 
-//Import utils
-@import "scss/utils/utils";
+//RESET THE PAGE BASICS
+@import "scss/base/reset";
 
 //Imprt scss layout
 @import "scss/layout/grid";
@@ -16,3 +13,6 @@
 @import "scss/component/bgImage";
 @import "scss/component/account";
 @import "scss/component//404Page";
+
+//Import utils
+@import "scss/utils/utils";

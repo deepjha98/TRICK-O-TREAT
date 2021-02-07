@@ -5,11 +5,7 @@ import { connect } from "react-redux";
 const PrivateRoute = (props) => {
   const { user } = props.AuthReducer;
   return user ? (
-    <Route
-      path={props.path}
-      exact={props.exact}
-      component={PushSubscriptionOptions.component}
-    />
+    <Route path={props.path} exact={props.exact} component={props.component} />
   ) : (
     <Redirect to="/login" />
   );

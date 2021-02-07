@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 import RouteLinks from "./private/RouteLinks";
 import InvalidRoute from "./components/InvalidRoute";
+import CreatePost from "./components/CreatePost/Create";
 //////////////////////////////////////////
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <RouteLinks path="/register" exact component={Register} />
         <RouteLinks path="/login" exact component={Login} />
         <PrivateRoute path="/dashboard" exact component={Dashboard} />
+        <PrivateRoute path="/create" exact component={CreatePost} />
         <Route component={InvalidRoute} />
       </Switch>
     </Router>
